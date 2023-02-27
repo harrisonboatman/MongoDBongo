@@ -55,11 +55,15 @@ updateUser(req, res) {
   },
 
   addFriend(req,res) {
+    console.log(req.params.friendId);
+
     User.findOneAndUpdate(
         {_id: req.params.userId},
-        { $addToSet: {friends: req.body}},
-        {runValidators: true, new: true}
+        { $addToSet: {friends: req.params.friendId}},
+        { runValidators: true, new: true}
     )
+  
+
     .then((user) => {
         res.json(user)
     })
@@ -68,8 +72,8 @@ updateUser(req, res) {
   deleteFriend(req,res) {
     User.findOneAndUpdate(
         {_id: req.params.userId},
-        { $pull: {friends: req.body}},
-        {runValidators: true, new: true}
+        { $pull: {friends: req.params.friendId}},
+        { new: true}
     )
     .then((user) => {
         res.json(user)

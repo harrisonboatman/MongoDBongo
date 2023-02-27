@@ -1,11 +1,11 @@
-const { ObjectID, ObjectId } = require('bson');
+const { ObjectID, ObjectId, Timestamp } = require('bson');
 const { Schema, model } = require('mongoose');
 
 const reactionSchema = new Schema(
     {
         reactionId: {
             type: Schema.Types.ObjectId,
-            default: new ObjectId
+            default: () => new Types.ObjectId(),
         },
         reactionBody: {
             type: String,
@@ -18,7 +18,7 @@ const reactionSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now(),
+            default: Date.now,
             get: (createdAt) => dateFormat(createdAt)
         }
     }
@@ -34,8 +34,8 @@ const thoughtSchema = new Schema(
         },
         createdAt: {
             type: Date,
-            default: Date.now(),
-            get: (createdAtVal) => dateFormat(createdAtVal)
+            default: Date.now("MM DD YYYY"),
+ 
 
         },
         
@@ -51,9 +51,11 @@ const thoughtSchema = new Schema(
     {
         toJSON: {
             getters: true,
-            virtuals: true
+            virtuals: true,
+            
         },
-        id:false
+        id:false,
+        timestamps: true
     }
 );
 
