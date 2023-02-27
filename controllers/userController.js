@@ -37,7 +37,7 @@ module.exports = {
 },
 deleteUser(req, res) {
     User.findOneAndDelete({ _id: req.params.userId })
-      .then((user) => res.json({user,  message: 'user and students deleted!' }))
+      .then((user) => res.json({user,  message: 'user was successfully deleted!' }))
       .catch((err) => res.status(500).json(err));
 },
 updateUser(req, res) {
